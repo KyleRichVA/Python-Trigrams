@@ -34,3 +34,7 @@ def list_to_tri(InputList):
             trigam[(key1, key2)] = [value]
     print trigam  # TESTING
     return trigam
+
+
+def get_rand_triKey(trigam):
+    return trigam.items()[random.randint(0, len(trigam)-1)][0]

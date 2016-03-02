@@ -26,3 +26,13 @@ expectedDict = {('hello', 'there'): ['my', 'kyle'],
 def test_list_to_tri(InputList, expected):
     from trigrams import list_to_tri
     assert list_to_tri(InputList) == expected
+
+
+testDict = {(1, 3): 'bleh', (3, 4): 'yo'}
+expectedKey = [(1, 3), (3, 4)]
+
+
+@pytest.mark.parametrize('D, K', [(testDict, expectedKey)])
+def test_get_rand_triKey(D, K):
+    from trigrams import get_rand_triKey
+    assert get_rand_triKey(D) in K
