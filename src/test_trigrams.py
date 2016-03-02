@@ -12,6 +12,17 @@ expectedList = ['hello', 'my', 'name', 'Is', 'Kyle', 'Richardson', '45']
 
 
 @pytest.mark.parametrize('text, expected', [(testStr, expectedList)])
-def test_txt_to_tri(text, expected):
-    from trigrams import txt_to_tri
-    assert txt_to_tri(text) == expected
+def test_txt_to_list(text, expected):
+    from trigrams import txt_to_list
+    assert txt_to_list(text) == expected
+
+textList = ['hello', 'there', 'my', 'hello', 'there', 'kyle']
+expectedDict = {('hello', 'there'): ['my', 'kyle'],
+                ('there', 'my'): ['hello'],
+                ('my', 'hello'): ['there']}
+
+
+@pytest.mark.parametrize('InputList, expected', [(textList, expectedDict)])
+def test_list_to_tri(InputList, expected):
+    from trigrams import list_to_tri
+    assert list_to_tri(InputList) == expected
