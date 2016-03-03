@@ -15,11 +15,9 @@ def get_file_txt(inputFile):
 
 def txt_to_list(text):
     str_list = text.split(" ")
-    print str_list  # TESTING
     for ind, word in enumerate(str_list):
         str_list[ind] = re.sub("[^\w]", "", word)
         str_list = [x for x in str_list if x]
-    print str_list  # TESTING
     return str_list
 
 
@@ -33,7 +31,6 @@ def list_to_tri(InputList):
             trigam[(key1, key2)].append(value)
         else:
             trigam[(key1, key2)] = [value]
-    print trigam  # TESTING
     return trigam
 
 
@@ -59,4 +56,4 @@ if __name__ == "__main__":
     fileTxt = get_file_txt(fileName)
     strList = txt_to_list(fileTxt)
     trigam = list_to_tri(strList)
-    print(generate_text(trigam))
+    print(generate_text(trigam, numWords))
