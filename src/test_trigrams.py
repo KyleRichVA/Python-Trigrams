@@ -36,3 +36,9 @@ expectedKey = [(1, 3), (3, 4)]
 def test_get_rand_triKey(D, K):
     from trigrams import get_rand_triKey
     assert get_rand_triKey(D) in K
+
+
+@pytest.mark.parametrize('T, N', [(expectedDict, 200)])
+def test_generate_text(T, N):
+    from trigrams import generate_text
+    assert len(generate_text(T, N).split(" ")) == 200

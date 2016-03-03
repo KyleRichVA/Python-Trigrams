@@ -3,6 +3,7 @@
 import io
 import random
 import re
+from sys import argv
 
 
 def get_file_txt(inputFile):
@@ -38,3 +39,24 @@ def list_to_tri(InputList):
 
 def get_rand_triKey(trigam):
     return trigam.items()[random.randint(0, len(trigam)-1)][0]
+
+
+def generate_text(trigam, numWords):
+    wordList = list(get_rand_triKey(trigam))
+    while len(wordList) < numWords:
+        if (wordList[-2], wordList[-1]) in trigam.keys():
+            potentialWords = trigam[(wordList[-2], wordList[-1])]
+            wordList.append(potentialWords[
+                random.randint(0, len(potentialWords)-1)])
+        else:
+            randKey = get_rand_triKey(trigam)
+            wordList.append(randKey[0])
+            wordList.append(randKey[1])
+    return ' '.join(wordList)
+
+if __name__ == "__main__":
+    script, fileName, numWords = argv
+    fileTxt = get_file_txt(fileName)
+    strList = txt_to_list(fileTxt)
+    trigam = list_to_tri(strList)
+    print(generate_text(trigam))
