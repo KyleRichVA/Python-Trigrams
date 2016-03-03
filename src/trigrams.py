@@ -14,10 +14,11 @@ def get_file_txt(inputFile):
 
 
 def txt_to_list(text):
-    str_list = text.split(" ")
+    spaced_text = re.sub(r"[\r\n]", ' ', text)
+    str_list = spaced_text.split(" ")
     for ind, word in enumerate(str_list):
-        str_list[ind] = re.sub("[^\w]", "", word)
-        str_list = [x for x in str_list if x]
+        str_list[ind] = re.sub(r"[^\w]", "", word)
+    str_list = [x for x in str_list if x]
     return str_list
 
 
@@ -49,6 +50,7 @@ def generate_text(trigam, numWords):
             randKey = get_rand_triKey(trigam)
             wordList.append(randKey[0])
             wordList.append(randKey[1])
+    wordList = wordList[:numWords]
     return ' '.join(wordList)
 
 if __name__ == "__main__":
