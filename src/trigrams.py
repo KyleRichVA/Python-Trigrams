@@ -31,7 +31,7 @@ def txt_to_list(text):
 
 
 def list_to_tri(InputList):
-    '''return a trigam dict based off InputList'''
+    '''return a trigram dict based off InputList'''
     trigram = {}
     while len(InputList) >= 3:
         key1 = InputList[-3]
@@ -46,25 +46,25 @@ def list_to_tri(InputList):
     return trigram
 
 
-def get_rand_triKey(trigam):
-    '''return a random key from a trigam dict'''
-    return trigam.items()[random.randint(0, len(trigam)-1)][0]
+def get_rand_triKey(trigram):
+    '''return a random key from a trigram dict'''
+    return random.choice(list(trigram.keys()))
 
 
-def generate_text(trigam, numWords):
+def generate_text(trigram, numWords):
     '''generate (numWords) ammount of words in a single string
-    based off the (trigam) dict'''
+    based off the (trigram) dict'''
     # set the first two words as a random key in trigram
-    wordList = list(get_rand_triKey(trigam))
+    wordList = list(get_rand_triKey(trigram))
     while len(wordList) < numWords:
         # if key exists add one trigram value to generated text
-        if (wordList[-2], wordList[-1]) in trigam.keys():
-            potentialWords = trigam[(wordList[-2], wordList[-1])]
+        if (wordList[-2], wordList[-1]) in trigram.keys():
+            potentialWords = trigram[(wordList[-2], wordList[-1])]
             wordList.append(potentialWords[
                 random.randint(0, len(potentialWords)-1)])
         # if a trigram cannot be found select a random key and add the words
         else:
-            randKey = get_rand_triKey(trigam)
+            randKey = get_rand_triKey(trigram)
             wordList.append(randKey[0])
             wordList.append(randKey[1])
     # clear out any extra words that may have been made
