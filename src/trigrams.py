@@ -41,7 +41,6 @@ def list_to_tri(InputList):
         # Attempt to append value to key if it is in the trigram dict.
         try:
             trigram[(key1, key2)].append(value)
-            print(trigram[(key1, key2)])
         # If a Key Error is thrown, make a new list for that key
         except KeyError:
             trigram[(key1, key2)] = [value]
