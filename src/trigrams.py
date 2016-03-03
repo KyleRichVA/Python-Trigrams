@@ -34,23 +34,24 @@ def list_to_tri(InputList):
     '''returns a trigam dict based off InputList where (0,1) refer to List[2],
     (1,2) refer to List[3] and so forth'''
     trigam = {}
+    validInd = range(len(InputList))
     # goes through the list 3 at a time.
-    while len(InputList) >= 3:
-        key1 = InputList.pop(0)
-        key2 = InputList[0]
-        value = InputList[1]
-        # if a key already exists modify it's value
-        if (key1, key2) in trigam.keys():
-            trigam[(key1, key2)].append(value)
-        # otherwise make a new key value relation
-        else:
-            trigam[(key1, key2)] = [value]
+    for ind, word in enumerate(InputList):
+        if ind+1 in validInd and ind+2 in validInd:
+            # if a key already exists modify it's value
+            if (InputList[ind], InputList[ind + 1]) in trigam.keys():
+                trigam[(InputList[ind], InputList[ind + 1])].append(
+                    InputList[ind + 2])
+            # otherwise make a new key value relation
+            else:
+                trigam[(InputList[ind],
+                       InputList[ind + 1])] = [InputList[ind + 2]]
     return trigam
 
 
 def get_rand_triKey(trigam):
     '''returns a random key from a trigam dict'''
-    return trigam.items()[random.randint(0, len(trigam)-1)][0]
+    return random.choice(list(trigam.keys()))
 
 
 def generate_text(trigam, numWords):
