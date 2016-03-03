@@ -12,7 +12,7 @@ from sys import argv
 
 def get_file_txt(inputfile):
     """Take a text file(inputfile) and returns it's text."""
-    f = io.open(inputfile)
+    f = io.open(inputfile, encoding='utf-8')
     file_txt = f.read()
     f.close()
     return file_txt
