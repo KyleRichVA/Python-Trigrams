@@ -56,4 +56,4 @@ if __name__ == "__main__":
     fileTxt = get_file_txt(fileName)
     strList = txt_to_list(fileTxt)
     trigam = list_to_tri(strList)
-    print(generate_text(trigam, numWords))
+    print(generate_text(trigam, int(numWords)))
