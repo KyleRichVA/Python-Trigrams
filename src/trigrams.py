@@ -60,7 +60,7 @@ def generate_text(trigram, num_words):
     word_list = list(get_rand_trikey(trigram))
     while len(word_list) < num_words:
         # if key exists add one trigram value to generated text
-        if (word_list[-2], word_list[-1]) in trigram.keys():
+        if (word_list[-2], word_list[-1]) in trigram:
             potential_words = trigram[(word_list[-2], word_list[-1])]
             word_list.append(potential_words[
                 random.randint(0, len(potential_words) - 1)])
