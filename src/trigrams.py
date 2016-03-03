@@ -31,31 +31,30 @@ def txt_to_list(text):
 
 
 def list_to_tri(InputList):
-    '''returns a trigam dict based off InputList where (0,1) refer to List[2],
+    '''return a trigam dict based off InputList where (0,1) refer to List[2],
     (1,2) refer to List[3] and so forth'''
-    trigam = {}
-    validInd = range(len(InputList))
-    # goes through the list 3 at a time.
-    for ind, word in enumerate(InputList):
-        if ind+1 in validInd and ind+2 in validInd:
-            # if a key already exists modify it's value
-            if (InputList[ind], InputList[ind + 1]) in trigam.keys():
-                trigam[(InputList[ind], InputList[ind + 1])].append(
-                    InputList[ind + 2])
-            # otherwise make a new key value relation
-            else:
-                trigam[(InputList[ind],
-                       InputList[ind + 1])] = [InputList[ind + 2]]
-    return trigam
+    trigram = {}
+    while len(InputList) >= 3:
+        key1 = InputList[-3]
+        key2 = InputList[-2]
+        value = InputList.pop(-1)
+        # Attempt to append value to key if it is in the trigram dict.
+        try:
+            trigram[(key1, key2)].append(value)
+            print(trigram[(key1, key2)])
+        # If a Key Error is thrown, make a new list for that key
+        except KeyError:
+            trigram[(key1, key2)] = [value]
+    return trigram
 
 
 def get_rand_triKey(trigam):
-    '''returns a random key from a trigam dict'''
-    return random.choice(list(trigam.keys()))
+    '''return a random key from a trigam dict'''
+    return trigam.items()[random.randint(0, len(trigam)-1)][0]
 
 
 def generate_text(trigam, numWords):
-    '''generates (numWords) ammount of words in a single string
+    '''generate (numWords) ammount of words in a single string
     based off the (trigam) dict'''
     # set the first two words as a random key in trigram
     wordList = list(get_rand_triKey(trigam))
@@ -72,12 +71,11 @@ def generate_text(trigam, numWords):
             wordList.append(randKey[1])
     # clear out any extra words that may have been made
     wordList = wordList[:numWords]
-
     return ' '.join(wordList)
 
 if __name__ == "__main__":
     script, fileName, numWords = argv
     fileTxt = get_file_txt(fileName)
     strList = txt_to_list(fileTxt)
-    trigam = list_to_tri(strList)
-    print(generate_text(trigam, int(numWords)))
+    trigram = list_to_tri(strList)
+    print(generate_text(trigram, int(numWords)))
