@@ -9,7 +9,7 @@ from sys import argv
 
 
 def get_file_txt(inputFile):
-    '''Takes a text file(inputFile) and reads the text into memory to be returned'''
+    '''Takes a text file(inputFile) and returns it's text'''
     f = io.open(inputFile)
     file_txt = f.read()
     f.close()
