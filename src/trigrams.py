@@ -14,7 +14,7 @@ def get_file_txt(inputFile):
 
 
 def txt_to_list(text):
-    spaced_text = re.sub(r"[\r\n]", ' ', text)
+    spaced_text = re.sub(r"[\r\n]|[+-]", ' ', text)
     str_list = spaced_text.split(" ")
     for ind, word in enumerate(str_list):
         str_list[ind] = re.sub(r"[^\w]", "", word)
