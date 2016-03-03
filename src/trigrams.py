@@ -31,8 +31,7 @@ def txt_to_list(text):
 
 
 def list_to_tri(InputList):
-    '''return a trigam dict based off InputList where (0,1) refer to List[2],
-    (1,2) refer to List[3] and so forth'''
+    '''return a trigam dict based off InputList'''
     trigram = {}
     while len(InputList) >= 3:
         key1 = InputList[-3]
